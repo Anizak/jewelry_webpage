@@ -1,0 +1,15 @@
+.main {
+  width: auto;
+  height: 40px;
+  background-color: rgb(170, 156, 251);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main p {
+  font-size: 14px;
+  color: rgba(79, 79, 79, 1);
+  font-family: "Montserrat";
+  font-weight: 500;
+}
