@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./CategoryModal.module.css";
+import CustomModal from "./CustomModal";
 
 const CategoryModal = () => {
+
+  const [open, setOpen] = useState(true);
+
+  const closeModal = (param)=> {
+    setOpen(param);
+  }
   return (
     <div className={style.box}>
-      <button className={style.plusBtn}>
+      <button onClick={()=>setOpen(true)} className={style.plusBtn}>
         <svg
           width="15"
           height="14"
@@ -30,6 +37,7 @@ const CategoryModal = () => {
           </g>
         </svg>
       </button>
+    {open && <CustomModal onOpen={closeModal}/> }
     </div>
   );
 };
