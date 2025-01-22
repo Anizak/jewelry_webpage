@@ -3,11 +3,11 @@ import { categories } from "../../services/category.service";
 
 const initialState = {
   categories: categories,
-  filtredCategories: categories.filter((item) => item.gender === 2),
   products: [],
   gender: 2,
-  selectedCategory: categories[0],
-  selectedSubcategory: categories[0].subcategory[0],
+  selectedCategory: categories.filter((item) => item.gender === 2)[0],
+  selectedSubcategory: categories.filter((item) => item.gender === 2)[0]
+    .subcategory[0],
 };
 
 const ProductReducer = (state, action) => {
@@ -21,8 +21,22 @@ const ProductReducer = (state, action) => {
   if (action.type === "selectedSubcategory") {
     return { ...state, selectedSubcategory: action.payload };
   }
-  if(action.type === "selectGender"){
-     return {...state, gender: action.payload, filtredCategories : state.categories.filter((item) => item.gender === action.payload)}
+  if (action.type === "selectGender") {
+    return {
+      ...state,
+      gender: action.payload,
+      selectedCategory: categories.filter(
+        (item) => item.gender === action.payload
+      )[0],
+      selectedSubcategory : categories.filter(
+        (item) => item.gender === action.payload
+      )[0].subcategory[0],
+    };
+  }
+  if (action.type === "addCategory") {
+    console.log(action.payload);
+
+    return { ...state, categories: [action.payload, ...state.categories] };
   }
 
   return state;

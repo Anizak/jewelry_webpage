@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./Category.module.css";
 import CategoryModal from "../modals/categoryModal/CategoryModal";
 import CategoryItem from "../categoryItems/CategoryItem";
@@ -6,6 +6,7 @@ import { ProductContext } from "../contexts/ProductContext";
 
 const Category = () => {
   const { state, dispatch } = useContext(ProductContext);
+  const [filtredCategories, setFilteredCategories] = useState([]);
 
   const selectGender = (gender) => {
     dispatch({
@@ -14,6 +15,9 @@ const Category = () => {
     });
   };
   console.log(state);
+  useEffect(() => {
+    setFilteredCategories(state.categories.filter((item) => item.gender === state.gender))
+  }, [state.gender, state.categories])
   return (
     <div className={style.main}>
       <div className={style.btnBox}>
@@ -47,7 +51,7 @@ const Category = () => {
         </button>
       </div>
       <div className={style.categoryBox}>
-        {state.filtredCategories.map((category) => {
+        {filtredCategories.map((category) => {
           return <CategoryItem key={category.id} item={category} />;
         })}
       </div>

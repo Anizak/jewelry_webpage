@@ -9,3 +9,6 @@
     border: none;
     cursor: pointer;
 }
+.btn:disabled{
+    background-color: rgba(211, 211, 211, 1);
+} 

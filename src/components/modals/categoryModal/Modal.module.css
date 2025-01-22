@@ -8,6 +8,8 @@
   text-align: center;
   background-color: rgba(255, 255, 255, 1);
   border-color: rgba(79, 79, 79, 0.55);
+  position: relative;
+
 }
 
 .addBox .titleBox {
@@ -25,6 +27,7 @@
   border: none;
   background-color: unset;
   color: rgba(79, 79, 79, 0.55);
+  cursor: pointer;
 }
 
 .addBox .titleBox span {
@@ -83,7 +86,7 @@
   border-radius: 5px;
   background-size: cover;
   background-repeat: no-repeat;
-  position: relative;
+  cursor: pointer;
 }
 
 .addBox .image_upload span {
@@ -96,7 +99,7 @@
   height: 30px;
 }
 
-.addBox .image_upload .closeImageBtn {
+.addBox .closeImageBtn {
   width: 16px;
   height: 16px;
   font-size: 100%;
@@ -104,8 +107,8 @@
   background-color: unset;
   color: rgba(79, 79, 79, 0.55);
   position: absolute;
-  top: -9px;
-  right: -10px;
+  top: 120px;
+  right: 0px;
   cursor: pointer;
 }
 

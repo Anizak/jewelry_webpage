@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import style from "./CategoryModal.module.css";
 import CustomModal from "./CustomModal";
 
-const CategoryModal = () => {
+const CategoryModal = ({children}) => {
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const closeModal = (param)=> {
     setOpen(param);
