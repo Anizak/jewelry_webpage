@@ -13,13 +13,14 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    width: "301px",
-    height: "360px",
+    width: "auto",
+    maxWidth: "600px",
+    height: "auto",
     borderRadius: "5px",
   },
 };
 
-const CustomModal = ({ onOpen, id }) => {
+const CustomModal = ({ onOpen, id, isSub }) => {
   const [modalIsOpen, setIsOpen] = useState(true);
   const { state, dispatch } = useContext(ProductContext);
   const [image, setImage] = useState(null);
@@ -37,7 +38,7 @@ const CustomModal = ({ onOpen, id }) => {
   function addCategory() {
     const category =  {
       id: Date.now(),
-      title: value,
+      title: value.trim(),
       image: image,
       gender : gender,
       subcategory: [],
@@ -47,6 +48,19 @@ const CustomModal = ({ onOpen, id }) => {
       payload: category
     })
     closeModal();
+  }
+
+  function addSubCategory(){
+      const subcategory = 
+        {
+          id : Date.now(),
+          title : value.trim(),
+        }
+      dispatch({
+        type: "addSubcategory",
+        payload: subcategory,
+      })
+      closeModal();
   }
 
   function uploadImage(e) {
@@ -75,12 +89,12 @@ const CustomModal = ({ onOpen, id }) => {
       >
         <div className={style.addBox}>
           <div className={style.titleBox}>
-            <span>Добавить Категория</span>
+            <span>{isSub ? state.selectedCategory.title + " : добавить подкатегория" : "Добавить Категория"}</span>
             <button onClick={closeModal} className={style.closeModalbtn}>
               <TfiClose />
             </button>
           </div>
-          <div className={style.genderSelectBtn}>
+          {!isSub && <div className={style.genderSelectBtn}>
             <button
               onClick={() => setGender(2)}
               className={style.btn}
@@ -126,15 +140,15 @@ const CustomModal = ({ onOpen, id }) => {
               </svg>
               <span>Мужской</span>
             </button>
-          </div>
+          </div>}
           <input
             className={style.inputCategory}
             type="text"
-            placeholder="категория"
+            placeholder= {isSub ? "подкатегория" : "категория" }
             value={value}
             onChange={(e) => setValue(e.target.value)}
           ></input>
-          <label
+          {!isSub && <label
             style={{ backgroundImage: `url(${image})` }}
             className={style.image_upload}
             htmlFor="upload_image"
@@ -145,7 +159,7 @@ const CustomModal = ({ onOpen, id }) => {
                 <span>Загрузить Фото</span>
               </>
             )}
-          </label>
+          </label>}
           <input
             style={{ display: "none" }}
             type="file"
@@ -157,7 +171,7 @@ const CustomModal = ({ onOpen, id }) => {
               <TfiClose />
             </button>
           )}
-          <AddButton onClick={addCategory}  disabled = {value.trim() && image ? false : true }>Добавить</AddButton>
+          <AddButton onClick={isSub ? addSubCategory : addCategory}  disabled = {value.trim() && (isSub ? true : image) ? false : true }>Добавить</AddButton>
         </div>
       </Modal>
     </div>

@@ -28,15 +28,34 @@ const ProductReducer = (state, action) => {
       selectedCategory: categories.filter(
         (item) => item.gender === action.payload
       )[0],
-      selectedSubcategory : categories.filter(
+      selectedSubcategory: categories.filter(
         (item) => item.gender === action.payload
       )[0].subcategory[0],
     };
   }
   if (action.type === "addCategory") {
-    console.log(action.payload);
-
     return { ...state, categories: [action.payload, ...state.categories] };
+  }
+  if (action.type === "addSubcategory") {
+    return {
+      ...state,
+      categories: state.categories.map((elem) => {
+        let isAdd = true;
+        if (elem.id === state.selectedCategory.id) {
+          elem.subcategory.forEach((el) => {
+            if (el.id == action.payload.id) {
+              isAdd = false;
+              return;
+            }
+          });
+          if (isAdd) {
+            elem.subcategory.push(action.payload);
+            return elem;
+          }
+        }
+        return elem;
+      }),
+    };
   }
 
   return state;

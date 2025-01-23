@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./CategoryModal.module.css";
 import CustomModal from "./CustomModal";
 
-const CategoryModal = ({children}) => {
+const CategoryModal = () => {
 
   const [open, setOpen] = useState(false);
 
@@ -37,7 +37,7 @@ const CategoryModal = ({children}) => {
           </g>
         </svg>
       </button>
-    {open && <CustomModal onOpen={closeModal}/> }
+    {open && <CustomModal isSub={false} onOpen={closeModal}/> }
     </div>
   );
 };
