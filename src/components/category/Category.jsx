@@ -14,7 +14,7 @@ const Category = () => {
       payload: gender,
     });
   };
-  console.log(state);
+  
   useEffect(() => {
     setFilteredCategories(state.categories.filter((item) => item.gender === state.gender))
   }, [state.gender, state.categories])

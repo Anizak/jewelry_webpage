@@ -1,0 +1,11 @@
+.container{
+    width: 100%;
+    min-height: 800px;
+    /* background-color: rgb(231, 243, 231); */
+    padding-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}

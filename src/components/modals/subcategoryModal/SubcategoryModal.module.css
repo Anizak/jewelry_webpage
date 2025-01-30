@@ -1,6 +1,7 @@
 .box{
     width: 48px;
     height: 40px;
+    margin-left: 20px;
 }
 
 .box .plusBtn{

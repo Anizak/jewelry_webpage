@@ -1,7 +1,7 @@
 .main {
   width: auto;
   height: 40px;
-  background-color: rgb(170, 156, 251);
+  /* background-color: rgb(170, 156, 251); */
   display: flex;
   justify-content: flex-start;
   align-items: center;

@@ -1,10 +1,12 @@
 .main {
   width: 100%;
   height: 100px;
-  background-color: rgb(162, 225, 162);
+  /* background-color: rgba(230, 230, 230, 1); */
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .main .btnBox {
@@ -27,11 +29,42 @@
 }
 
 .main .categoryBox{
-  width: calc(100% - 140px);
+  width: auto;
+  max-width: calc(100% - 140px);
   height: 100%;
   /* background-color: red; */
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px
+  gap: 20px;
+  overflow: auto;
+  
+}
+
+.main .categoryBox {
+  --sb-track-color: #394044;
+  --sb-thumb-color: #6179bd;
+  --sb-size: 9px;
+}
+
+.main .categoryBox::-webkit-scrollbar {
+  height: var(--sb-size)
+}
+
+.main .categoryBox::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 9px;
+}
+
+.main .categoryBox::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 9px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .main .categoryBox {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
 }

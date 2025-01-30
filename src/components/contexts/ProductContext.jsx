@@ -1,9 +1,10 @@
 import { createContext, useReducer } from "react";
 import { categories } from "../../services/category.service";
+import { products } from "../../services/products.service";
 
 const initialState = {
   categories: categories,
-  products: [],
+  products: products,
   gender: 2,
   selectedCategory: categories.filter((item) => item.gender === 2)[0],
   selectedSubcategory: categories.filter((item) => item.gender === 2)[0]
