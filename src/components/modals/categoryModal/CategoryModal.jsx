@@ -11,7 +11,7 @@ const CategoryModal = () => {
   }
   return (
     <div className={style.box}>
-      <button onClick={()=>setOpen(true)} className={style.plusBtn}>
+   <button onClick={()=>setOpen(true)} className={style.plusBtn}>
         <svg
           width="15"
           height="14"

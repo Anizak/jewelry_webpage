@@ -1,0 +1,28 @@
+.addBox{
+    width: 820px;
+    height: 505px;
+}
+
+.addBox .titleBox{
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+.addBox .titleBox span{
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(46, 46, 46, 1);
+}
+
+
+.addBox .titleBox .closeModalbtn{
+    background-color: unset;
+    border: none;
+    font-size: 18px;
+    color: rgba(79, 79, 79, 0.55);
+    cursor: pointer;
+   
+}

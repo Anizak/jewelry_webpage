@@ -8,8 +8,8 @@ import ProductList from '../productList/ProductList'
 const Product = () => {
   return (
     <div className={style.main}>
-      <Category/>
-      <SubcategoryField/>
+      <Category toAdd={true} isCallback={false}/>
+      <SubcategoryField toAdd={true}/>
       <ProductList/>
     </div>
   )

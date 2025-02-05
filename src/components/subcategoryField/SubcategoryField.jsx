@@ -5,7 +5,7 @@ import SubcategoryModal from "../modals/subcategoryModal/SubcategoryModal";
 import SubcategoryItem from "../items/subcategory/SubcategoryItem";
 import { ProductContext } from "../contexts/ProductContext";
 
-const SubcategoryField = () => {
+const SubcategoryField = ({toAdd}) => {
   const {state} = useContext(ProductContext)
   return (
     <div className={style.main}>
@@ -14,7 +14,7 @@ const SubcategoryField = () => {
          <SubcategoryItem key={item.id} data= {item}/>
         );
       })}
-      <SubcategoryModal />
+      {toAdd && <SubcategoryModal />}
     </div>
   );
 };
