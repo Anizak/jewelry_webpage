@@ -58,7 +58,9 @@ const ProductReducer = (state, action) => {
       }),
     };
   }
-
+  if (action.type === "addProduct"){
+    return {...state, products : [...state.products ,action.payload]}
+  }
   return state;
 };
 

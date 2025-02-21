@@ -24,38 +24,44 @@ const customStyles = {
 
 const CustomProductModal = ({ onOpen, id, isSub }) => {
   const [modalIsOpen, setIsOpen] = useState(true);
-  const { state, dispatch } = useContext(ProductContext);
+  const { dispatch } = useContext(ProductContext);
   const [image, setImage] = useState(null);
-  const [gender, setGender] = useState(2);
-  const [value, setValue] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
 
+  const [category, setCategory] = useState({});
+  const [subcategory, setSubcategory] = useState({});
+  const [gender, setGender] = useState(2);
+  
   function closeModal() {
     setIsOpen(false);
     onOpen(false);
   }
 
-  function addCategory() {
-    const category = {
+  function addProduct() {
+    const product = {
       id: Date.now(),
-      title: value.trim(),
+      name: name,
+      article: Math.floor(Math.random() * 10000000),
       image: image,
-      gender: gender,
-      subcategory: [],
+      price: price,
+      categoryId: category.id,
+      subcategoryId: subcategory.id,
     };
     dispatch({
-      type: "addCategory",
+      type : "selectGender",
+      payload : gender,
+    })
+    dispatch({
+      type: "addProduct",
+      payload: product,
+    });
+    dispatch({
+      type: "selectCategory",
       payload: category,
     });
-    closeModal();
-  }
-
-  function addSubCategory() {
-    const subcategory = {
-      id: Date.now(),
-      title: value.trim(),
-    };
     dispatch({
-      type: "addSubcategory",
+      type: "selectedSubcategory",
       payload: subcategory,
     });
     closeModal();
@@ -67,7 +73,6 @@ const CustomProductModal = ({ onOpen, id, isSub }) => {
       const image = URL.createObjectURL(file);
       setImage(image);
     }
-    console.log(image);
   }
 
   function closeImage(e) {
@@ -78,9 +83,13 @@ const CustomProductModal = ({ onOpen, id, isSub }) => {
 
   //************ Callback functions */
 
-  const getCategory = (category)=>{
-    console.log(category);
-  }
+  const getCategoryAndGender = (payload) => {
+    setCategory(payload.category);
+    setGender(payload.gender);
+  };
+  const getSubcategory = (subcategory) => {
+    setSubcategory(subcategory);
+  };
 
   return (
     <div>
@@ -99,47 +108,71 @@ const CustomProductModal = ({ onOpen, id, isSub }) => {
             </button>
           </div>
           <div className={style.main}>
-            <Category toAdd={false} isCallback={true} callback={getCategory}/>
-            <SubcategoryField toAdd={false}/>
+            <Category toAdd={false} isCallback={true} callback={getCategoryAndGender} />
+            <SubcategoryField
+              toAdd={false}
+              isCallback={true}
+              data={category?.subcategory}
+              callback={getSubcategory}
+            />
           </div>
-          {/* <input
-            className={style.inputCategory}
-            type="text"
-            placeholder={isSub ? "подкатегория" : "категория"}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-          ></input> */}
-          {/* {!isSub && (
-            <label
-              style={{ backgroundImage: `url(${image})` }}
-              className={style.image_upload}
-              htmlFor="upload_image"
-            >
-              {!image && (
-                <>
-                  <img src="./src/assets/images/imageUploadIcon.png" />
-                  <span>Загрузить Фото</span>
-                </>
+          <div className={style.container}>
+            <div className={style.images}>
+              <input
+                style={{ display: "none" }}
+                type="file"
+                id="upload_image"
+                onChange={uploadImage}
+              ></input>
+              <label
+                style={{ backgroundImage: `url(${image})` }}
+                className={style.image_upload}
+                htmlFor="upload_image"
+              >
+                {!image && (
+                  <>
+                    <img src="./src/assets/images/imageUploadIcon.png" />
+                    <span>Загрузить Фото</span>
+                  </>
+                )}
+              </label>
+              {image && (
+                <button onClick={closeImage} className={style.closeImageBtn}>
+                  <TfiClose />
+                </button>
               )}
-            </label>
-          )}
-          <input
-            style={{ display: "none" }}
-            type="file"
-            id="upload_image"
-            onChange={uploadImage}
-          ></input>
-          {image && (
-            <button onClick={closeImage} className={style.closeImageBtn}>
-              <TfiClose />
-            </button>
-          )} */}
-          {/* <AddButton
-            onClick={isSub ? addSubCategory : addCategory}
-            disabled={value.trim() && (isSub ? true : image) ? false : true}
-          >
-            Добавить
-          </AddButton> */}
+            </div>
+
+            <div className={style.inputs}>
+              <label htmlFor="name" className={style.inputbox}>
+                имя
+                <input
+                  type="text"
+                  id="name"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                />
+              </label>
+              <label htmlFor="price" className={style.inputbox}>
+                цена
+                <input
+                  type="number"
+                  id="price"
+                  onChange={(e) => setPrice(e.target.value)}
+                  value={price}
+                />
+              </label>
+            </div>
+          </div>
+
+          {
+            <AddButton
+              onClick={addProduct}
+              disabled={name.trim() && price.trim() && image ? false : true}
+            >
+              Добавить
+            </AddButton>
+          }
         </div>
       </Modal>
     </div>

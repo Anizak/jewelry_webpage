@@ -3,6 +3,7 @@ import styles from "./ProductList.module.css";
 import ProductItem from "../items/subcategory/productItem/ProductItem";
 import { ProductContext } from "../contexts/ProductContext";
 import ProductModal from "../modals/productModal/ProductModal";
+import { products } from "../../services/products.service";
 
 const ProductList = () => {
   const { state } = useContext(ProductContext);
@@ -12,7 +13,7 @@ const ProductList = () => {
     setFilteredProducts(
       state.products.filter((item) => item.categoryId === state.selectedCategory.id && item.subcategoryId === state.selectedSubcategory.id)
     );
-  }, [state.selectedCategory, state.selectedSubcategory]);
+  }, [state.selectedCategory, state.selectedSubcategory, state.products]);
   return (
     <div className={styles.container}>
       <ProductModal/>

@@ -3,7 +3,7 @@ import style from "./ProductModal.module.css";
 import CustomProductModal from "./CustomProductModal";
 
 const ProductModal = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const closeModal = (param) => {
     setOpen(param);

@@ -37,14 +37,15 @@ const Category = ({ toAdd, isCallback, callback }) => {
 
   const getCategory = (payload) => {
     setSelectedCategory(payload);
-    // callback(payload);
 
   };
 
   useEffect(() => {
-    if (Object.keys(selectedCategory).length > 0) {
-      // console.log(selectedCategory);
-    // callback(selectedCategory);
+    if (Object.keys(selectedCategory).length > 0 && isCallback) {
+    callback({
+      category : selectedCategory,
+      gender : localGender,
+    });
       
     }
   }, [selectedCategory]);
